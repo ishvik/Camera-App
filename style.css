@@ -1,0 +1,162 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    background-color: darksalmon;
+}
+
+.video-container{
+    height: 70%;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 3%;
+    /* transform: scale(3); */
+    overflow: hidden;
+}
+
+video{
+    height: 100%;
+    width: 100%;
+    /* transform: scale(2); */
+}
+
+#record,#capture{
+    position: fixed;
+    border: 3px solid lightgray;
+    border-radius: 50%;
+    display: flex;
+    z-index: 3;
+}
+
+#record{
+    left: 65rem;
+    height: 5rem;
+    width: 5rem;
+    top: 81vh;
+}
+
+#capture{
+    left: 55rem;
+    height: 6rem;
+    width: 6rem;
+    top: 80vh;
+    background-color: lightgray;
+}
+
+#record:hover,#capture:hover,#gallery:hover{
+    cursor: pointer;
+}
+
+#capture div{
+    height: 4rem;
+    width: 4rem;
+    margin: auto;
+    border-radius: 50%;
+    font-size: 4rem;
+}
+
+#record div{
+    margin: auto;
+    border-radius: 50%;
+    font-size: 3rem;
+    color: red;
+}
+
+#gallery{
+    position: fixed;
+    height: 4rem;
+    width: 4rem;
+    left: 4rem;
+    top: 82vh;
+    left: 45rem;
+}
+
+#gallery div{
+    font-size: 4rem;
+    color: purple;
+}
+
+.capture-animation{
+    animation: inOut 0.5s;
+}
+
+.record-animation{
+    animation: inOut infinite 1s;
+}
+
+@keyframes inOut{
+    0%{
+        transform: scale(1);
+    }
+
+    50%{
+        transform: scale(1.2);
+    }
+
+    100%{
+        transform: scale(1);
+    }
+}
+
+.zoom-in{
+    position: fixed;
+    top: 77vh;
+    font-size: 2rem;
+    right: 30rem;
+}
+
+.zoom-out{
+    position: fixed;
+    top: 77vh;
+    font-size: 2rem;
+    right: 28rem;
+}
+
+.zoom-in:hover,.zoom-out:hover{
+    cursor: pointer;
+    font-size: 2.2rem;
+}
+
+.filter-btn{
+    position: fixed;
+    top: 77vh;
+    left: 30rem;
+    font-size: 3rem;
+}
+
+.filter-btn:hover{
+    cursor: pointer;
+}
+
+.filters-container{
+    position: fixed;
+    /* background-color: white; */
+    height: 65vh;
+    width: 6vw;
+    top: 15vh;
+    left: 4rem;
+    z-index: 3;
+    display: none;
+}
+
+.filters-color{
+    width: 90%;
+    background-color: black;
+    height: 15%;
+    border: 2px solid white;
+    background: url("fil.jpeg");
+    background-size: cover;
+    background-blend-mode: soft-light;
+    
+}
+
+.filter-div{
+    height: 70.5%;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 3%;
+    position: fixed;
+    top: 0;
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="video-container">
+        <!-- playing video -->
+        <video autoplay style="transform: scale(1);"></video>
+    </div>
+    <div class="filters-container">
+        <div class="filters-color" style="background-color: #ff6b6b82"></div>
+        <div class="filters-color" style="background-color: #48dafb4b"></div>
+        <div class="filters-color" style="background-color: #ff9ff265"></div>
+        <div class="filters-color" style="background-color: #ff793f59"></div>
+        <div class="filters-color" style="background-color: #ffb04248"></div>
+        <div class="filters-color"></div>
+    </div>
+    <div class="material-icons zoom-in">zoom_in</div>
+    <div class="material-icons zoom-out">zoom_out</div>
+    <!-- button for start and stop video record -->
+    <button id="record">
+        <div class="material-icons">videocam</div>
+    </button>
+    <button id="capture">
+        <div class="material-icons">camera</div>
+    </button>
+    <div id="gallery">
+        <div class="material-icons galleryBtn">collections</div>
+    </div>
+    <div class="material-icons filter-btn">photo_filter</div>
+    <script src="scriptDB.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

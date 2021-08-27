@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas></canvas>
+    <script>
+        let canvas = document.querySelector("canvas");
+        canvas.height = window.innerHeight;   
+        canvas.width = window.innerWidth;
+
+        let ctx = canvas.getContext("2d");   //initializing an canvas object which draw 2d drawings
+        ctx.beginPath();                    //starting new path
+        ctx.moveTo(100, 200);               //moving path to given coordinates
+        ctx.lineTo(300, 400);               //drawing lines from 300 to 400
+        ctx.strokeStyle = "blue";           //changing color of line
+        ctx.lineWidth = 20;                 //changing width to 20
+        ctx.stroke();                       //final draw
+        ctx.beginPath();                    //starting new path
+        ctx.moveTo(300, 400);               //again going to that path
+        ctx.lineTo(600, 200);               //making line
+        ctx.strokeStyle = "red";            //change color of line
+        ctx.stroke();                       //final draw
+        ctx.strokeRect(100, 200, 300, 400); //making rectangle
+        ctx.lineWidth = 30;                  //changing line of rectangle
+        ctx.strokeStyle = "black";          //changing color of rectangle
+        ctx.fillStyle = "pink";             //changing color of filling rectangle
+        ctx.fillRect(100, 200, 300, 400);   //fill rectangle
+        let img = document.createElement("img");    //creating an image tag
+        img.src = "mahadev.jpeg";                   //giving source of image
+
+        img.addEventListener("load", function (e) {     //invoke when image loads completely
+            ctx.drawImage(img, 0, 0);                   //after loads its draw that image on screen
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- input for the name of database -->
+    <input id="dbname" type="text" placeholder="DB name" value="DB">
+    <!-- input for version number of database -->
+    <input type="number" id="version" placeholder="1.0">
+    <!-- button for creating -->
+    <button id="create">Create</button>
+    <hr />
+    <!-- input for getting notes -->
+    <input type="text" id="note" placeholder="Your Note" />
+    <button id="add">Add Note</button>
+    <script>
+        let dbname = document.querySelector("#dbname");
+        let version = document.querySelector("#version");
+        let btn = document.querySelector("button#create");
+        let note = document.querySelector("#note");
+        let addBtn = document.querySelector("#add");
+
+        // on click Add note button your note will add to database
+        addBtn.addEventListener("click", function () {
+            let val = note.value;
+            // if no database is open then it will through an error
+            if (!dbAccess) {
+                alert("Please open a database");
+                return;
+            }
+
+            // doing transaction with read and write mode in cs objectStore
+            let tx = dbAccess.transaction("cs", "readwrite");
+            // getting cs objectStore
+            let csObjectStore = tx.objectStore("cs");
+            //creating object for storing in DB
+            let data = {
+                nId: Date.now(),    //giving unique id all time
+                noteValue: val,     //notevalue is that U have entered in Note input
+            };
+            //adding data to cs-object Store
+            csObjectStore.add(data);
+        });
+
+        let db, v, dbAccess;
+        // click on button
+        btn.addEventListener("click", function () {
+            db = dbname.value;       //getting value of database name input
+            v = version.value;      //getting value of database version input
+            let request = indexedDB.open(db, v);        //this will open DB if already created else create new one 
+            request.addEventListener("success", function () {      //invoke when database created
+                alert("db was created");
+                dbAccess = request.result;                          //getting result of request from indexedDB
+                viewdata();
+            })
+
+            request.addEventListener("upgradeneeded", function () {        //invoke when database create or version upgraded
+                alert("upgrade occured");
+                let db = request.result;
+                db.createObjectStore("cs", { keyPath: "nId" })              //making collection of objects like we create in a table in sql named as cs
+            });
+
+            request.addEventListener("error", function () {                //invoke when there is error in creating database or upgrading its version
+                alert("some error occured");
+            })
+        })
+
+        //function for viewing data of DB with assumption that we have access of DB
+        function viewdata(){
+            //requesting for transaction in readonly mode
+            let tx = dbAccess.transaction("cs","readonly");
+            //accessing cs objectStore
+            let csObjectStore = tx.objectStore("cs");
+            //reuqesting for cursor and this cursor will only point to top object
+            let req = csObjectStore.openCursor();
+
+            //adding event listener for getting all cursor one by one
+            req.addEventListener("success",function(){
+                let cursor = req.result;  //getting result of cursor
+                //if cursor is not empty
+                if(cursor){
+                    console.log(cursor.value);  //print object value
+                    cursor.continue();      //hit line 83 until cusror is not empty
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
